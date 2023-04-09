@@ -1,0 +1,43 @@
+<div class="mt-4">
+    <h3>Cập nhật khóa nhá</h3>
+
+    <form class="mt-4" method="post" action="/courses/{{course._id}}?_method=PUT">
+  <div class="form-group">
+    <label for="name"> Name</label>
+    <input type="text" class="form-control" value="{{course.Name}}" id="Name" name="Name">
+  </div>
+
+  <div class="form-group">
+    <label for="name">Email</label>
+    <input type="text" class="form-control" value="{{course.Email}}" id="Email" name="Email">
+  </div>
+
+  <div class="form-group">
+    <label for="name">Age</label>
+    <input type="text" class="form-control" value="{{course.Age}}" id="Age" name="Age">
+  </div>
+  
+  <div class="form-group">
+    <label for="name"> Address</label>
+    <input type="text" class="form-control"  value="{{course.Address}}" id=" Address" name=" Address">
+  </div>
+
+  <div class="form-group">
+    <label for="name">Action</label>
+    <input type="text" class="form-control" value="{{course.Action}}" id="Action" name="Action">
+  </div>
+
+  <div class="form-group">
+    <label for="name">Tag</label>
+    <input type="text" class="form-control" value="{{course.Tag}}" id="Tag" name="Tag">
+  </div>
+
+  <div class="form-group">
+    <label for="name">Deadline_1</label>
+    <input type="text" class="form-control" value="{{course.Deadline_1}" id="Deadline_1" name="Deadline_1">
+  </div>
+
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+</div>

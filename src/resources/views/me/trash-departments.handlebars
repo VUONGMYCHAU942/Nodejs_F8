@@ -1,0 +1,102 @@
+<div class="small text-center mt-4">
+ 
+  <div class="text-left">
+    <a href="/me/stored/departments">Back</a>
+    <h3>Role da xoa</h3>
+  </div>
+
+    <table class="table table-bordered ">
+    <thead class="table-success">
+        <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Tag</th>
+ 
+        <th scope="col" colspan="4"></th>
+
+        </tr>
+    </thead>
+         <tbody>
+            {{#each departments}}
+            <tr>
+            <th scope="row">{{sum @index 1}}</th>
+            <td>{{this.Tag}}</td>
+        
+            <td>
+                <a href="" class="btn btn-link btn-restore" data-id="{{this._id}}">Khôi Phục </a> {{!--Khôi phục--}}
+            </td>
+            <td>
+                <a href=""  class="btn btn-link" data-toggle="modal" data-id="{{this._id}}"data-target="#delete-department-modal">Xóa vĩnh viễn</a>
+            </td>
+            </tr>
+
+            {{else}}
+            <tr>
+              <td colspan="10">
+                Thung rac trong.
+              <a href="/me/stored/departments">Danh sach user</a>
+
+              </td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+</div>
+{{!--Confirm delete department--}}
+<div id="delete-department-modal"  class="modal" tabindex="-1" department="dialog">
+  <div class="modal-dialog" department="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delete</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p>Xóa vĩnh viễn </p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btn-delete-department" class="btn btn-danger">Xóa vĩnh viễn</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+    <form name="delete-department-form" method="post"></form>
+     <form name="restore-department-form" method="post"></form>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+     var departmentId;
+     var deleteForm = document.forms['delete-department-form'];
+     var restoreForm = document.forms['restore-department-form'];
+     var btnDeleteCourse = document.getElementById('btn-delete-department');
+     var restoreBtn = $('.btn-restore');// khôi phục
+
+
+    //When dialog confirm clicked
+    $('#delete-department-modal').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget) 
+      departmentId = button.data('id')
+    });
+     //When dialog confirm clicked 
+    btnDeleteCourse.onclick = function (){
+        deleteForm.action = '/departments/' + departmentId + '/force?_method2=DELETE';
+        deleteForm.submit();
+    }
+    
+    // Restore btn click khôi phục
+    restoreBtn.click(function (e) {
+        e.preventDefault();
+        //chayquery element với cái nút restoreBtn
+       var departmentId =  $(this).data('id');
+        restoreForm.action = '/departments/' + departmentId + '/restore?_method2=PATCH';
+        restoreForm.submit();
+    });
+});
+
+   
+</script>
+
